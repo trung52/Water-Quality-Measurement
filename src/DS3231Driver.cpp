@@ -1,28 +1,13 @@
 #include "DS3231Driver.h"
 
-ERROR_CODE DS3231_init(RTC_DS3231& _realTime, NTPClient&  _timeClient, TwoWire &_wire, struct connectionStatus _connectionStatus)
+ERROR_CODE DS3231_init(RTC_DS3231& _realTime, TwoWire &_wire)
 {
 	if (_realTime.begin(&_wire))			// khoi dong module RTC
 	{
-		log_e("RTC module initialized successfully!");        		
+		log_i("RTC module initialized successfully!");        		
 		connectionStatus_st.ds3231Module = status_et::CONNECTED;
-		if (_connectionStatus.wifiStatus == status_et::CONNECTED)		// kiem tra co ket noi wifi
-		{
-			if (Ping.ping(remote_host_string))				// kiem tra ping duong dan "www.google.com"
-			{
-				_timeClient.update();						// cap nhat thoi gian cho RTC	
-				uint32_t epochTime_u32 = _timeClient.getEpochTime();
-				_realTime.adjust(DateTime(epochTime_u32));			// Set the date and flip the Oscillator Stop Flag
-				log_i("Updatetime DS3231....");
-				log_i("Updatetime success. Current time: %u.", _realTime.now().unixtime());
-			}
-			return ERROR_NONE;
-		} else 
-		{
-			log_e("Wifi is disconnect.");
-			log_e("Updatetime failed.");
-			return ERROR_RTC_UPDATE_TIME_FAILED;
-		}
+		//_realTime.adjust(DateTime(F(__DATE__), F(__TIME__)));
+		return ERROR_NONE;
 
 	} else {
 		log_e("RTC module initialized failed!");		
@@ -31,11 +16,11 @@ ERROR_CODE DS3231_init(RTC_DS3231& _realTime, NTPClient&  _timeClient, TwoWire &
 	}
 }
 
-ERROR_CODE DS3231_getStringDateTime(RTC_DS3231 _realTime, DateTime::timestampOpt _opt, char *_dateTime_string)
+ERROR_CODE DS3231_getStringDateTime(RTC_DS3231& _realTime, DateTime::timestampOpt _opt, char *_dateTime_string)
 {
-	if (connectionStatus_st.ds3231Module ==  status_et::CONNECTED)		// kiem tra thoi gian co hop le
+	if (connectionStatus_st.ds3231Module ==  status_et::CONNECTED)		// Check RTC DS3231's status
 	{
-		strcpy(_dateTime_string, (_realTime.now().timestamp(_opt).c_str()));		// in thoi gian hien tai ra Serial
+		strcpy(_dateTime_string, (_realTime.now().timestamp(_opt).c_str()));		// Copy timestamp to string datetime return
 
 		log_i("Get DateTime successfully!");
 		return ERROR_NONE;

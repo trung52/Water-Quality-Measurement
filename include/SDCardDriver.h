@@ -16,7 +16,7 @@
 #include "esp_log.h"
 #include <stdarg.h>
 //#include "globals.h"
-#include "DeviceManager.h"
+#include "configs.h"
 #include <SD.h>
 
 #define ERROR_SD_CARD_INIT_FAILED 		(0x31)

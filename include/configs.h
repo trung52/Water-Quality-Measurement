@@ -31,12 +31,12 @@ enum status_et
 
 struct connectionStatus
 {
-    status_et wifiStatus;
     status_et sdCardStatus;
     status_et ds3231Module;
     status_et rfModule;
 };
 
+extern struct connectionStatus connectionStatus_st;
 //========================== DEFINE FOR LOGGING ========================
 
 #define USING_SDCARD
