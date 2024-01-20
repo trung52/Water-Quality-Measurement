@@ -31,7 +31,7 @@ ERROR_CODE SDcard_readFile( const char *fileName_string,
 							uint32_t *numberOfReadByte_u32)
 {
 	File readFile;
-	readFile = SD.open(fileNameCalib, FILE_READ);
+	readFile = SD.open(fileName_string, FILE_READ); //se truyen vao fileNameCalib
 	if (readFile)			// kiem tra tinh trang mo file co thanh cong
 	{
 		String buffer_string = "";
@@ -91,14 +91,15 @@ ERROR_CODE SDcard_readCalibDataFromFile(struct connectionStatus *_connectStatus,
 }
 
 
-ERROR_CODE SDcard_saveStringDataToFile( struct connectionStatus *_connectStatus,
+ERROR_CODE SDcard_saveStringDataToFile( const char *fileName_string,
+										struct connectionStatus *_connectStatus,
 										const char *fileContent_string)
 {
 	if (_connectStatus->sdCardStatus == status_et::CONNECTED)
 	{
 		File writeFile;
 		char locationFileSaveData[30] = "/";
-		strcat(locationFileSaveData, nameFileSaveData);
+		strcat(locationFileSaveData, fileName_string); //se truyen vao nameFileSaveData
 		strcat(locationFileSaveData, ".txt");
 		writeFile = SD.open(locationFileSaveData, FILE_APPEND);		// mo file de ghi du lieu
 		if (writeFile)											// kiem tra trang thai mo file co thanh cong
