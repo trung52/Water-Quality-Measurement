@@ -1,0 +1,16 @@
+Lưu ý khi dùng cảm biến DO:
+1) Tuổi thọ của điện cực: 1 năm
+2) Phải thay màng lọc định kỳ:
+    +) 1-2 tháng nếu trong nước bẩn
+    +) 4-5 tháng nếu trong nước sạch
+3) Thay dung dịch NaOH (0,5mol/L) mỗi tháng 1 lần, đổ đầy 2/3 thể tích nắp của đầu cảm biến
+4) Cách bảo quản đầu đo:
+    4.1) Thời gian ngắn (qua đêm đến một tuần): nhúng đầu dò vào nước tinh khiết hoặc nước khử ion để ngăn dung dịch làm đầy bay hơi. 
+    Ngắt kết nối đầu dò khỏi thiết bị chính mỗi khi không sử dụng.
+    4.2) Thời gian dài: (trên một tuần): tháo nắp ra khỏi đầu dò và rửa lõi điện cực (cực âm: bạch kim, cực dương: chì) và rửa nắp bằng nước tinh khiết hoặc nước khử ion. 
+    Lau khô tất cả các thành phần bằng khăn giấy. Vặn nắp lại vào đầu dò mà không thêm bất kỳ dung dịch  nào để tránh tiêu thụ cực dương. Đặt tất cả các thành phần trở lại vào gói.
+5) Các bước để calib 1 điểm:
+-Chuẩn bị đầu dò
+-Làm ướt đầu dò trong nước cất và rũ bỏ những giọt nước dư thừa
+-Để đầu dò tiếp xúc với không khí và duy trì luồng không khí thích hợp (không dùng quạt để thổi)
+-Sau khi điện áp ra ổn định, ghi lại điện áp là điện áp oxy hòa tan bão hòa ở nhiệt độ hiện tại

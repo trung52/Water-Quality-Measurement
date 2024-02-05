@@ -1,11 +1,10 @@
-/*
+/**
  * @file DataStructure.h
- * @author your name (you@domain.com)
+ * @author Vu Thanh Trung
  * @brief 
  * @version 0.1
- * @date 2022-11-11
+ * @date 2024-01-17
  * 
- * @copyright Copyright (c) 2022
  * 
 */
 
@@ -51,21 +50,30 @@ ERROR_CODE creatCalibDataString(char *_calibDataString, struct calibData _calibD
 struct sensorData {
     float temperature; 
     float depth; // Get depth through pressure sensor
+    uint32_t DO_voltage;
     uint16_t DO_value;
+    double       lon_f;
+    double       lat_f;
 
     sensorData() 
     {
-        this->temperature = 0;
-        this->depth		  = 0;
-        this->DO_value    = 0;
+        this->temperature    = 0;
+        this->depth		     = 0;
+        this->DO_voltage     = 0;
+        this->DO_value       = 0;
+        this->lon_f          = 0;
+        this->lat_f          = 0;
         
     };
 
     sensorData operator=(const sensorData _sensorData_temp)
     {
         this->temperature	 = _sensorData_temp.temperature;
-        this->depth		 = _sensorData_temp.depth;
-        this->DO_value	 = _sensorData_temp.DO_value;
+        this->depth		     = _sensorData_temp.depth;
+        this->DO_voltage     = _sensorData_temp.DO_voltage;
+        this->DO_value	     = _sensorData_temp.DO_value;
+        this->lon_f          = _sensorData_temp.lon_f;
+        this->lat_f          = _sensorData_temp.lat_f;
         
         return _sensorData_temp;
     }

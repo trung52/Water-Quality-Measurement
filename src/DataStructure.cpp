@@ -3,7 +3,7 @@
 
 ERROR_CODE creatCalibDataString(char *_calibDataString, struct calibData _calibData)
 {
-	sprintf(_calibDataString, "%u|%u|%u|%u|%u|%u|%u\n",
+	sprintf(_calibDataString, "%u|%u|%u\n",
 							  _calibData.temperature_calibInt_u32,
 							  _calibData.depth_calibInt_u32,
                               _calibData.DO_value_calibInt_u32 );
@@ -12,7 +12,7 @@ ERROR_CODE creatCalibDataString(char *_calibDataString, struct calibData _calibD
 		log_e("Create string failed!");
 		return ERROR_DATA_CREATE_STRINGDATA_FAILED;
 	} else {    
-        log_e("%s",_calibDataString);
+        log_i("%s",_calibDataString);
 
 		log_i("Create string complete!");
 		return ERROR_NONE;
@@ -26,8 +26,10 @@ ERROR_CODE createSensorDataString(char *_sensorDataString,
                                   struct sensorData _sensorData_st)
 {
     strcpy(_sensorDataString, "");
-    sprintf(_sensorDataString, "%s,%.1f,%.1f,%f,%u,%u,%u,%u,",
+    sprintf(_sensorDataString, "%s,%.1f,%.1f,%.1f,%.1f,%u,",
                                 _dateTimeString,
+								_sensorData_st.lat_f,
+								_sensorData_st.lon_f,
                                 _sensorData_st.temperature,
                                 _sensorData_st.depth,
                                 _sensorData_st.DO_value);
@@ -38,7 +40,7 @@ ERROR_CODE createSensorDataString(char *_sensorDataString,
 		return ERROR_DATA_CREATE_STRINGDATA_FAILED;
 	} else {
         
-        log_e("%s",_sensorDataString);
+        log_i("%s",_sensorDataString);
 		log_i("Create string complete!");
 		return ERROR_NONE;
 	}

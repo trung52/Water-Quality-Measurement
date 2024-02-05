@@ -13,7 +13,7 @@ ERROR_CODE SDcard_init(uint8_t _pinSCK,
 	if (SD.begin(_pinCS))
 	{
 		_connectionStatus->sdCardStatus = status_et::CONNECTED;
-		log_e("SD init success.");
+		log_i("SD init success.");
 		return ERROR_NONE;
 	}
 	else

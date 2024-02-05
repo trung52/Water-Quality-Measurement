@@ -1,15 +1,17 @@
-/*
- * File: configs.h
- * Authors: Hank <lctuyenvn@gmail.com>
- * Create: 2019-04-17 16:51:03
- *
- * Copyright (c) 2019 EmBCI. All right reserved.
- *
- * Modify this file to quickly configure ESP32
- */
+/**
+ * @file config.h
+ * @author Vu Thanh Trung
+ * @brief 
+ * @version 0.1
+ * @date 2024-01-17
+ * 
+ * 
+*/
 
 #ifndef CONFIGS_H
 #define CONFIGS_H
+
+#include <Arduino.h>
 
 #define NAME_DEVICE "SPARC-1"
 
