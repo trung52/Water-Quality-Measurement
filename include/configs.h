@@ -17,6 +17,8 @@
 
 #define SERIAL_DEBUG_BAUDRATE   (9600)
 #define DEVICE_DATA_SAVE_INTERVAL 5000
+#define VREF 3300
+#define ADC_RES 4096 // ADC Resolution
 #define ERROR_CODE int
 #define ERROR_NONE (0x00)
 

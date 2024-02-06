@@ -44,7 +44,7 @@ ERROR_CODE gps_init();
  * @retval ERROR_NONE: if success
  * @retval ERROR_GPS_GET_DATA_FAILED: if failed
  */
-ERROR_CODE gps_getdata(float  &_lat, float  &_lon);
+ERROR_CODE gps_getData(float  &_lat, float  &_lon);
 
 
 #endif

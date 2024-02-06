@@ -49,6 +49,8 @@ ERROR_CODE creatCalibDataString(char *_calibDataString, struct calibData _calibD
 
 struct sensorData {
     float temperature; 
+    float pressCurrent;
+    float pressVoltage;
     float depth; // Get depth through pressure sensor
     uint32_t DO_voltage;
     uint16_t DO_value;
@@ -58,6 +60,8 @@ struct sensorData {
     sensorData() 
     {
         this->temperature    = 0;
+        this->pressCurrent   = 0;
+        this->pressVoltage   = 0;
         this->depth		     = 0;
         this->DO_voltage     = 0;
         this->DO_value       = 0;
@@ -69,6 +73,8 @@ struct sensorData {
     sensorData operator=(const sensorData _sensorData_temp)
     {
         this->temperature	 = _sensorData_temp.temperature;
+        this->pressCurrent   = _sensorData_temp.pressCurrent;
+        this->pressVoltage   = _sensorData_temp.pressVoltage;
         this->depth		     = _sensorData_temp.depth;
         this->DO_voltage     = _sensorData_temp.DO_voltage;
         this->DO_value	     = _sensorData_temp.DO_value;

@@ -39,6 +39,8 @@ RTC_DS3231 realTime;
 void setup() {
   pinMode(PIN_NUM_5V_CTRL, OUTPUT);
   pinMode(PIN_NUM_12V_CTRL, OUTPUT);
+  pinMode(PIN_NUM_DO_SENSOR, INPUT);
+  pinMode(PIN_NUM_PRESSURE_SENSOR, INPUT);
   Serial.begin(115200);
   gps_init();
   DS3231_init(realTime, Wire);
@@ -46,10 +48,12 @@ void setup() {
   SDcard_init(PIN_NUM_CLK, PIN_NUM_MISO, PIN_NUM_MOSI, PIN_CS_SD_CARD, &connectionStatus_st);
   
 }
+/*
 //For single-point calibration
 uint32_t DO_raw;
 uint32_t DO_cal1V;
 float DO_cal1T;
+*/
 
 void loop() {
   /*

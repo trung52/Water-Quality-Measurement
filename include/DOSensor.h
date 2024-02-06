@@ -13,10 +13,6 @@
 
 #include "configs.h"
 
-
-#define VREF 3300
-#define ADC_RES 4096 // ADC Resolution
-
 #define TWO_POINT_CALIBRATION 0
 
 //Single point calibration needs to be filled CAL1_V and CAL1_T
@@ -36,16 +32,18 @@ const uint16_t DO_Table[41] = {
 /**
  * @brief Get average sensor voltage
  * @param[in] _pin: ADC pin
- * @return int32_t: average sensor voltage (mV)
+ * @param[out] voltage_mv: DO voltage
+ * @return ERROR_CODE
 */
-uint32_t averageSensorVoltage(uint8_t _pin);
+ERROR_CODE averageSensorVoltage(uint8_t _pin, uint32_t &voltage_mv);
 
 /**
  * @brief Get DO value 
  * @param[in] voltage_mv: sensor voltage (get from ADC)
  * @param[in] temperature_c: measured environment temperature in Celsius (get from DS18B20)
- * @return int16_t: DO value (ug/L)
+ * @param[out] _DO_value: DO value
+ * @return ERROR_CODE
 */
-int16_t DO_getData(uint32_t voltage_mv, uint8_t temperature_c);
+ERROR_CODE DO_getData(uint32_t voltage_mv, uint8_t temperature_c, uint16_t &_DO_value);
 
 #endif

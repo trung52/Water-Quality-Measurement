@@ -8,7 +8,7 @@ neoGPS.begin(9600, SERIAL_8N1, PIN_NUM_GPS_RX, PIN_NUM_GPS_TX);
     return ERROR_NONE;
 }
 
-ERROR_CODE gps_getdata(double  &_lat, double  &_lon)
+ERROR_CODE gps_getData(double  &_lat, double  &_lon)
 {
     if(neoGPS.available() > 0){
         if(gps.encode(neoGPS.read())){
