@@ -36,8 +36,9 @@ enum status_et
 struct connectionStatus
 {
     status_et sdCardStatus;
-    status_et ds3231Module;
-    status_et rfModule;
+    status_et ds3231Status;
+    status_et rfStatus;
+    status_et gpsStatus;
 };
 
 extern struct connectionStatus connectionStatus_st;

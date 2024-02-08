@@ -3,8 +3,8 @@
 
 ERROR_CODE gps_init()
 {        
-neoGPS.begin(9600, SERIAL_8N1, PIN_NUM_GPS_RX, PIN_NUM_GPS_TX);
-
+    neoGPS.begin(9600, SERIAL_8N1, PIN_NUM_GPS_RX, PIN_NUM_GPS_TX);
+    connectionStatus_st.gpsStatus = status_et::CONNECTED;
     return ERROR_NONE;
 }
 
@@ -15,6 +15,7 @@ ERROR_CODE gps_getData(double  &_lat, double  &_lon)
             if(gps.location.isValid()){
                 _lat = gps.location.lat();
                 _lon = gps.location.lng();
+                log_i("GPS NEO-M8N gets data successfully ");
                 return ERROR_NONE;
             }
             else{

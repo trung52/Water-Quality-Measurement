@@ -29,7 +29,7 @@
  * @param[out] _depth: depth value
  * @return ERROR_CODE
 */
-ERROR_CODE submersiblePressure_getDepth(float _voltage_mv, float &_pressCurrent, float &_depth){
+ERROR_CODE submersiblePressure_getDepth(uint32_t _voltage_mv, float &_pressCurrent, float &_depth){
     _pressCurrent = _voltage_mv / 120; //Sense Resistor:120ohm
     _depth = (_pressCurrent - CURRENT_INIT) * (DEPTH_RANGE/ DENSITY_WATER/ 16.0); // Calculate depth from current readings
     if(_depth < 0){

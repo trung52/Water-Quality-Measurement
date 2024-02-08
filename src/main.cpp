@@ -9,6 +9,7 @@
 #include "GpsDriver.h"
 #include "DS18B20Driver.h"
 #include "DOSensor.h"
+#include "SubmersiblePressure.h"
 
 
 /* **************************************** Global variables definition**************************************** */
@@ -19,7 +20,6 @@ const char *prompt = "WQM> ";
 char dateTime_string[25];
 char dataCalib_string[50];
 char sensorDataString[64];
-String messageData;
 
 struct sensorData sensorData_st;
 struct calibData calibData_st;
@@ -32,9 +32,34 @@ char topic[32];
 const char fileNameCalib[] = "calib.txt";			// file chua cac gia tri calib
 char nameFileSaveData[12];							// ten file luu du lieu cua sensor theo tung ngay
 
-
 RTC_DS3231 realTime;
 
+bool RF_requestData = false;
+
+void device_getData(){
+  //Get Latitude & Longitude
+  if(connectionStatus_st.gpsStatus == status_et::CONNECTED)
+    gps_getData(sensorData_st.lat_f, sensorData_st.lon_f);
+  //Get temperature
+  DS18B20_getData(sensorData_st.temperature);
+  //Get DO value
+  averageSensorVoltage(PIN_NUM_DO_SENSOR, sensorData_st.DO_voltage);
+  DO_getData(sensorData_st.DO_voltage, sensorData_st.temperature, sensorData_st.DO_value);
+  //Get depth
+  averageSensorVoltage(PIN_NUM_PRESSURE_SENSOR, sensorData_st.pressVoltage);
+  submersiblePressure_getDepth(sensorData_st.pressVoltage, sensorData_st.pressCurrent, sensorData_st.depth);
+  log_i("Get data successfully!");
+
+}
+
+void device_dataManagement(){
+  DS3231_getStringDateTime(realTime, DateTime::TIMESTAMP_FULL , dateTime_string);
+  createSensorDataString(sensorDataString, NAME_DEVICE, dateTime_string, sensorData_st);
+  DS3231_getStringDateTime(realTime, DateTime::TIMESTAMP_DATE, dateTime_string);
+  SDcard_saveStringDataToFile(&connectionStatus_st, sensorDataString);
+  
+  //Send data via RF module comming soon...
+}
 
 void setup() {
   pinMode(PIN_NUM_5V_CTRL, OUTPUT);
@@ -46,6 +71,7 @@ void setup() {
   DS3231_init(realTime, Wire);
   DS18B20_init();
   SDcard_init(PIN_NUM_CLK, PIN_NUM_MISO, PIN_NUM_MOSI, PIN_CS_SD_CARD, &connectionStatus_st);
+  log_i("Init all successfully");
   
 }
 /*
@@ -63,8 +89,17 @@ void loop() {
   DS18B20_getData(DO_cal1T);
   Serial.println("CAL1V:\t" + String(DO_cal1V));
   Serial.println("CAL1T:\t" + String(DO_cal1T));
-  delay(1000);*/
-
+  delay(1000); */
+  if(RF_requestData == true){
+    digitalWrite(PIN_NUM_5V_CTRL, HIGH);
+    digitalWrite(PIN_NUM_12V_CTRL, HIGH);
+    device_getData();
+    device_dataManagement();
+    digitalWrite(PIN_NUM_5V_CTRL, LOW);
+    digitalWrite(PIN_NUM_12V_CTRL, LOW);
+    RF_requestData = false;
+    delay(2000);
+  }
 
 }
 

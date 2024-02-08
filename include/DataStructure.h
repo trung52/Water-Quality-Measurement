@@ -50,7 +50,7 @@ ERROR_CODE creatCalibDataString(char *_calibDataString, struct calibData _calibD
 struct sensorData {
     float temperature; 
     float pressCurrent;
-    float pressVoltage;
+    uint32_t pressVoltage;
     float depth; // Get depth through pressure sensor
     uint32_t DO_voltage;
     uint16_t DO_value;
