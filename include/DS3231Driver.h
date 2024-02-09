@@ -43,6 +43,6 @@ ERROR_CODE DS3231_init(RTC_DS3231& _realTime, TwoWire &_wire);
  * @param[out] _dateTime_string: string datetime return
  * @return ERROR_CODE
  */
-ERROR_CODE DS3231_getStringDateTime(RTC_DS3231 _realTime,   DateTime::timestampOpt _opt, char *_dateTime_string);
+ERROR_CODE DS3231_getStringDateTime(RTC_DS3231 &_realTime,   DateTime::timestampOpt _opt, char *_dateTime_string);
 
 #endif

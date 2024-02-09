@@ -55,8 +55,8 @@ void device_getData(){
 void device_dataManagement(){
   DS3231_getStringDateTime(realTime, DateTime::TIMESTAMP_FULL , dateTime_string);
   createSensorDataString(sensorDataString, NAME_DEVICE, dateTime_string, sensorData_st);
-  DS3231_getStringDateTime(realTime, DateTime::TIMESTAMP_DATE, dateTime_string);
-  SDcard_saveStringDataToFile(&connectionStatus_st, sensorDataString);
+  DS3231_getStringDateTime(realTime, DateTime::TIMESTAMP_DATE, nameFileSaveData);
+  SDcard_saveStringDataToFile(nameFileSaveData,&connectionStatus_st, sensorDataString);
   
   //Send data via RF module comming soon...
 }
@@ -66,7 +66,11 @@ void setup() {
   pinMode(PIN_NUM_12V_CTRL, OUTPUT);
   pinMode(PIN_NUM_DO_SENSOR, INPUT);
   pinMode(PIN_NUM_PRESSURE_SENSOR, INPUT);
-  Serial.begin(115200);
+
+  digitalWrite(PIN_NUM_5V_CTRL, LOW);
+  digitalWrite(PIN_NUM_12V_CTRL, LOW);
+
+  Serial.begin(9600);
   gps_init();
   DS3231_init(realTime, Wire);
   DS18B20_init();
@@ -80,7 +84,7 @@ uint32_t DO_raw;
 uint32_t DO_cal1V;
 float DO_cal1T;
 */
-
+unsigned long device_previousDataControl = 0;
 void loop() {
   /*
   //Single-point calibration for DO sensor
@@ -90,6 +94,16 @@ void loop() {
   Serial.println("CAL1V:\t" + String(DO_cal1V));
   Serial.println("CAL1T:\t" + String(DO_cal1T));
   delay(1000); */
+  
+  /* check lora available hay ko. neu co thi doc de lay gtri RF_requestData.
+  Cach1:
+  Neu RF_requestData = true thi doc du lieu, luu vao the sd va gui RF den Bridge
+  Neu RF_requestData = false thi lay mau va luu du lieu theo chu ky
+  Cach2:
+  Chi lay du lieu khi RF_requestData = true
+  */
+  
+  
   if(RF_requestData == true){
     digitalWrite(PIN_NUM_5V_CTRL, HIGH);
     digitalWrite(PIN_NUM_12V_CTRL, HIGH);
@@ -98,8 +112,23 @@ void loop() {
     digitalWrite(PIN_NUM_5V_CTRL, LOW);
     digitalWrite(PIN_NUM_12V_CTRL, LOW);
     RF_requestData = false;
-    delay(2000);
+    device_previousDataControl = millis();
+  } 
+  else if(millis() - device_previousDataControl >= DEVICE_DATA_SAVE_INTERVAL){
+    digitalWrite(PIN_NUM_5V_CTRL, HIGH);
+    digitalWrite(PIN_NUM_12V_CTRL, HIGH);
+    device_getData();
+    device_dataManagement();
+    digitalWrite(PIN_NUM_5V_CTRL, LOW);
+    digitalWrite(PIN_NUM_12V_CTRL, LOW);
+    device_previousDataControl = millis();
   }
+
+  //Test ds3231, SD card, ds18b20, gps
+  // gps_getData(sensorData_st.lat_f, sensorData_st.lon_f);
+  // DS18B20_getData(sensorData_st.temperature);
+  // device_dataManagement();
+  // delay(2000);
 
 }
 

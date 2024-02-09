@@ -79,7 +79,8 @@ ERROR_CODE SDcard_readCalibDataFromFile(struct connectionStatus *_connectStatus,
  * @param[in] _connecctionStatus: pointer to struct store all connection status
  * @return ERROR_CODE 
  */
-ERROR_CODE SDcard_saveStringDataToFile( struct connectionStatus *_connectStatus,
+ERROR_CODE SDcard_saveStringDataToFile( const char *fileName_string,
+										struct connectionStatus *_connectStatus,
 										const char *fileContent_string);
 
 
