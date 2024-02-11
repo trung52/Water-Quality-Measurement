@@ -96,11 +96,12 @@ void loop() {
   delay(1000); */
   
   /* ****************************************Test submersible pressure sensor**************************************** */
-  // averageSensorVoltage(PIN_NUM_PRESSURE_SENSOR, sensorData_st.pressVoltage);
-  // submersiblePressure_getDepth(sensorData_st.pressVoltage, sensorData_st.pressCurrent, sensorData_st.depth);
-  // Serial.println(sensorData_st.pressCurrent);
-  // Serial.println(sensorData_st.depth);
-  // delay(2000);
+  averageSensorVoltage(PIN_NUM_PRESSURE_SENSOR, sensorData_st.pressVoltage);
+  Serial.println(sensorData_st.pressVoltage);
+  submersiblePressure_getDepth(sensorData_st.pressVoltage, sensorData_st.pressCurrent, sensorData_st.depth);
+  Serial.println(sensorData_st.pressCurrent);
+  Serial.println(sensorData_st.depth);
+  delay(2000);
 
   /* ****************************************Main code**************************************** */
   /* check lora available hay ko. neu co thi doc de lay gtri RF_requestData.
