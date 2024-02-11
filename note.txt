@@ -1,4 +1,4 @@
-Lưu ý khi dùng cảm biến DO:
+#Lưu ý khi dùng cảm biến DO:
 1) Tuổi thọ của điện cực: 1 năm
 2) Phải thay màng lọc định kỳ:
     +) 1-2 tháng nếu trong nước bẩn
@@ -7,10 +7,24 @@ Lưu ý khi dùng cảm biến DO:
 4) Cách bảo quản đầu đo:
     4.1) Thời gian ngắn (qua đêm đến một tuần): nhúng đầu dò vào nước tinh khiết hoặc nước khử ion để ngăn dung dịch làm đầy bay hơi. 
     Ngắt kết nối đầu dò khỏi thiết bị chính mỗi khi không sử dụng.
-    4.2) Thời gian dài: (trên một tuần): tháo nắp ra khỏi đầu dò và rửa lõi điện cực (cực âm: bạch kim, cực dương: chì) và rửa nắp bằng nước tinh khiết hoặc nước khử ion. 
+    4.2) Thời gian dài: (trên một tuần): tháo nắp ra khỏi đầu dò và rửa lõi điện cực (cực âm: bạch kim, cực dương: chì) và rửa nắp bằng nước cất hoặc nước khử ion. 
     Lau khô tất cả các thành phần bằng khăn giấy. Vặn nắp lại vào đầu dò mà không thêm bất kỳ dung dịch  nào để tránh tiêu thụ cực dương. Đặt tất cả các thành phần trở lại vào gói.
 5) Các bước để calib 1 điểm:
 -Chuẩn bị đầu dò
 -Làm ướt đầu dò trong nước cất và rũ bỏ những giọt nước dư thừa
 -Để đầu dò tiếp xúc với không khí và duy trì luồng không khí thích hợp (không dùng quạt để thổi)
 -Sau khi điện áp ra ổn định, ghi lại điện áp là điện áp oxy hòa tan bão hòa ở nhiệt độ hiện tại
+
+#Lưu ý khi dùng cảm biến áp suất
+1) Vui lòng kết nối nguồn điện chính xác như hướng dẫn kết nối.
+
+2) Sản phẩm là một thiết bị chính xác nên không được phép tháo rời, làm rơi thiết bị hoặc làm rơi từ trên cao xuống, 
+hơn nữa, không được chạm vào màng ngăn của nó bằng bất kỳ vật sắc nhọn nào trong trường hợp gây hư hỏng thiết bị.
+
+3) Cấp nguồn cho cảm biến mức áp suất chìm sau đó bạn có thể sử dụng nó. Nhưng nó có thể cung cấp đầu ra ổn định hơn sau khi 
+làm nóng trước trong 30 phút. Vui lòng tắt nguồn và ngừng sử dụng nếu phát hiện bất thường trong quá trình sử dụng.
+
+4) Dây dẫn mức chất lỏng phải thẳng đứng hướng xuống dưới. Vui lòng ngăn nước xâm nhập vào thiết bị đầu cuối 
+và khớp nối phải có khả năng chống thấm nước.
+
+5) Đặt đầu dò mức chất lỏng vào nước, cố gắng cố định và giữ nó cách xa đầu vào.

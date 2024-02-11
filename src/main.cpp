@@ -68,7 +68,7 @@ void setup() {
   pinMode(PIN_NUM_PRESSURE_SENSOR, INPUT);
 
   digitalWrite(PIN_NUM_5V_CTRL, LOW);
-  digitalWrite(PIN_NUM_12V_CTRL, LOW);
+  digitalWrite(PIN_NUM_12V_CTRL, HIGH);
 
   Serial.begin(9600);
   gps_init();
@@ -86,8 +86,8 @@ float DO_cal1T;
 */
 unsigned long device_previousDataControl = 0;
 void loop() {
+  /* ****************************************Single-point calibration for DO sensor**************************************** */
   /*
-  //Single-point calibration for DO sensor
   DO_raw = analogRead(PIN_NUM_DO_SENSOR);
   DO_cal1V = DO_raw * VREF / ADC_RES;
   DS18B20_getData(DO_cal1T);
@@ -95,6 +95,14 @@ void loop() {
   Serial.println("CAL1T:\t" + String(DO_cal1T));
   delay(1000); */
   
+  /* ****************************************Test submersible pressure sensor**************************************** */
+  // averageSensorVoltage(PIN_NUM_PRESSURE_SENSOR, sensorData_st.pressVoltage);
+  // submersiblePressure_getDepth(sensorData_st.pressVoltage, sensorData_st.pressCurrent, sensorData_st.depth);
+  // Serial.println(sensorData_st.pressCurrent);
+  // Serial.println(sensorData_st.depth);
+  // delay(2000);
+
+  /* ****************************************Main code**************************************** */
   /* check lora available hay ko. neu co thi doc de lay gtri RF_requestData.
   Cach1:
   Neu RF_requestData = true thi doc du lieu, luu vao the sd va gui RF den Bridge
@@ -103,32 +111,26 @@ void loop() {
   Chi lay du lieu khi RF_requestData = true
   */
   
-  
-  if(RF_requestData == true){
-    digitalWrite(PIN_NUM_5V_CTRL, HIGH);
-    digitalWrite(PIN_NUM_12V_CTRL, HIGH);
-    device_getData();
-    device_dataManagement();
-    digitalWrite(PIN_NUM_5V_CTRL, LOW);
-    digitalWrite(PIN_NUM_12V_CTRL, LOW);
-    RF_requestData = false;
-    device_previousDataControl = millis();
-  } 
-  else if(millis() - device_previousDataControl >= DEVICE_DATA_SAVE_INTERVAL){
-    digitalWrite(PIN_NUM_5V_CTRL, HIGH);
-    digitalWrite(PIN_NUM_12V_CTRL, HIGH);
-    device_getData();
-    device_dataManagement();
-    digitalWrite(PIN_NUM_5V_CTRL, LOW);
-    digitalWrite(PIN_NUM_12V_CTRL, LOW);
-    device_previousDataControl = millis();
-  }
+  // if(RF_requestData == true){
+  //   digitalWrite(PIN_NUM_5V_CTRL, HIGH);
+  //   digitalWrite(PIN_NUM_12V_CTRL, HIGH);
+  //   device_getData();
+  //   device_dataManagement();
+  //   digitalWrite(PIN_NUM_5V_CTRL, LOW);
+  //   digitalWrite(PIN_NUM_12V_CTRL, LOW);
+  //   RF_requestData = false;
+  //   device_previousDataControl = millis();
+  // } 
+  // else if(millis() - device_previousDataControl >= DEVICE_DATA_SAVE_INTERVAL){
+  //   digitalWrite(PIN_NUM_5V_CTRL, HIGH);
+  //   digitalWrite(PIN_NUM_12V_CTRL, HIGH);
+  //   device_getData();
+  //   device_dataManagement();
+  //   digitalWrite(PIN_NUM_5V_CTRL, LOW);
+  //   digitalWrite(PIN_NUM_12V_CTRL, LOW);
+  //   device_previousDataControl = millis();
+  // }
 
-  //Test ds3231, SD card, ds18b20, gps
-  // gps_getData(sensorData_st.lat_f, sensorData_st.lon_f);
-  // DS18B20_getData(sensorData_st.temperature);
-  // device_dataManagement();
-  // delay(2000);
 
 }
 

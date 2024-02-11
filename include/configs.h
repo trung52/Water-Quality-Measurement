@@ -21,7 +21,7 @@
 #define ADC_RES 4096 // ADC Resolution
 #define ERROR_CODE int
 #define ERROR_NONE (0x00)
-
+#define MAC_ADDRESS "D4:8A:FC:CE:EB:90"
 enum status_et
 {
     DISCONNECTED,
