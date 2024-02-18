@@ -10,6 +10,7 @@
 #include "DS18B20Driver.h"
 #include "DOSensor.h"
 #include "SubmersiblePressure.h"
+#include "LoraSX1278.h"
 
 
 /* **************************************** Global variables definition**************************************** */
@@ -56,9 +57,8 @@ void device_dataManagement(){
   DS3231_getStringDateTime(realTime, DateTime::TIMESTAMP_FULL , dateTime_string);
   createSensorDataString(sensorDataString, NAME_DEVICE, dateTime_string, sensorData_st);
   DS3231_getStringDateTime(realTime, DateTime::TIMESTAMP_DATE, nameFileSaveData);
+  LoraSX1278_sendDataString(sensorDataString, BRIDGE_DEVICE_ADDR, MEASUREMENT_DEVICE_ADDR);
   SDcard_saveStringDataToFile(nameFileSaveData,&connectionStatus_st, sensorDataString);
-  
-  //Send data via RF module comming soon...
 }
 
 void setup() {
@@ -75,8 +75,10 @@ void setup() {
   DS3231_init(realTime, Wire);
   DS18B20_init();
   SDcard_init(PIN_NUM_CLK, PIN_NUM_MISO, PIN_NUM_MOSI, PIN_CS_SD_CARD, &connectionStatus_st);
+  LoraSX1278_Init();
+  log_i("Warm up submersible pressure sensor and GPS module in 10 minutes...");
+  //delay(10 * 60 * 60);
   log_i("Init all successfully");
-  
 }
 /*
 //For single-point calibration
@@ -84,7 +86,7 @@ uint32_t DO_raw;
 uint32_t DO_cal1V;
 float DO_cal1T;
 */
-unsigned long device_previousDataControl = 0;
+
 void loop() {
   /* ****************************************Single-point calibration for DO sensor**************************************** */
   /*
@@ -96,42 +98,23 @@ void loop() {
   delay(1000); */
   
   /* ****************************************Test submersible pressure sensor**************************************** */
-  averageSensorVoltage(PIN_NUM_PRESSURE_SENSOR, sensorData_st.pressVoltage);
-  Serial.println(sensorData_st.pressVoltage);
-  submersiblePressure_getDepth(sensorData_st.pressVoltage, sensorData_st.pressCurrent, sensorData_st.depth);
-  Serial.println(sensorData_st.pressCurrent);
-  Serial.println(sensorData_st.depth);
-  delay(2000);
+  // averageSensorVoltage(PIN_NUM_PRESSURE_SENSOR, sensorData_st.pressVoltage);
+  // Serial.println(sensorData_st.pressVoltage);
+  // submersiblePressure_getDepth(sensorData_st.pressVoltage, sensorData_st.pressCurrent, sensorData_st.depth);
+  // Serial.println(sensorData_st.pressCurrent);
+  // Serial.println(sensorData_st.depth);
+  // delay(2000);
 
   /* ****************************************Main code**************************************** */
-  /* check lora available hay ko. neu co thi doc de lay gtri RF_requestData.
-  Cach1:
-  Neu RF_requestData = true thi doc du lieu, luu vao the sd va gui RF den Bridge
-  Neu RF_requestData = false thi lay mau va luu du lieu theo chu ky
-  Cach2:
-  Chi lay du lieu khi RF_requestData = true
-  */
   
-  // if(RF_requestData == true){
-  //   digitalWrite(PIN_NUM_5V_CTRL, HIGH);
-  //   digitalWrite(PIN_NUM_12V_CTRL, HIGH);
-  //   device_getData();
-  //   device_dataManagement();
-  //   digitalWrite(PIN_NUM_5V_CTRL, LOW);
-  //   digitalWrite(PIN_NUM_12V_CTRL, LOW);
-  //   RF_requestData = false;
-  //   device_previousDataControl = millis();
-  // } 
-  // else if(millis() - device_previousDataControl >= DEVICE_DATA_SAVE_INTERVAL){
-  //   digitalWrite(PIN_NUM_5V_CTRL, HIGH);
-  //   digitalWrite(PIN_NUM_12V_CTRL, HIGH);
-  //   device_getData();
-  //   device_dataManagement();
-  //   digitalWrite(PIN_NUM_5V_CTRL, LOW);
-  //   digitalWrite(PIN_NUM_12V_CTRL, LOW);
-  //   device_previousDataControl = millis();
-  // }
-
+  if(LoraSX1278_receiveRequest() == ERROR_NONE){
+    digitalWrite(PIN_NUM_5V_CTRL, HIGH);
+    digitalWrite(PIN_NUM_12V_CTRL, HIGH);
+    device_getData();
+    device_dataManagement();
+    digitalWrite(PIN_NUM_5V_CTRL, LOW);
+    digitalWrite(PIN_NUM_12V_CTRL, LOW);
+  } 
 
 }
 

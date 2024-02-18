@@ -22,10 +22,10 @@ static TinyGPSPlus gps;
 static HardwareSerial neoGPS(2);
 
 
-#define ERROR_GPS_INIT_FAILED                0xa2
-#define ERROR_GPS_GET_DATA_FAILED            0xa3
-#define ERROR_GPS_LOCATION_INVALID           0xa4
-#define ERROR_GPS_ENCODED_FAILED             0xa5
+#define ERROR_GPS_INIT_FAILED                0xA2
+#define ERROR_GPS_GET_DATA_FAILED            0xA3
+#define ERROR_GPS_LOCATION_INVALID           0xA4
+#define ERROR_GPS_ENCODED_FAILED             0xA5
 
 /**
  * @brief Initialize module GPS NEO M8N

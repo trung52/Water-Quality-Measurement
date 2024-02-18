@@ -24,10 +24,6 @@ ERROR_CODE gps_getData(double  &_lat, double  &_lon)
                 return ERROR_GPS_LOCATION_INVALID;
             }
         }
-        else{
-            log_e("gps encode failed");
-            return ERROR_GPS_ENCODED_FAILED;
-        }
     }
     if (millis() > 5000 && gps.charsProcessed() < 10){
         log_e("No GPS data received: check wiring");

@@ -20,9 +20,6 @@
 
 #define ERROR_DATA_CREATE_STRINGDATA_FAILED 0x91
 
-
-
-
 struct calibData {
     uint32_t temperature_calibInt_u32;
     uint32_t depth_calibInt_u32;

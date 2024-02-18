@@ -14,6 +14,7 @@
 #include <Arduino.h>
 
 #define NAME_DEVICE "SPARC-1"
+#define MEASUREMENT_DEVICE
 
 #define SERIAL_DEBUG_BAUDRATE   (9600)
 #define DEVICE_DATA_SAVE_INTERVAL 5000
@@ -60,6 +61,8 @@ extern struct connectionStatus connectionStatus_st;
 #define PIN_CS_SD_CARD  (5)
 
 #define PIN_CS_RF_MODULE   (4)
+#define PIN_RST_RF_MODULE  (2)
+#define PIN_DIO0_RF_MODULE (34)
 
 //========================== DEFINE FOR I2C ========================
 

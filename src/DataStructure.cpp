@@ -26,12 +26,12 @@ ERROR_CODE createSensorDataString(char *_sensorDataString,
                                   struct sensorData _sensorData_st)
 {
     strcpy(_sensorDataString, "");
-    sprintf(_sensorDataString, "%s,%.1f,%.1f,%.1f,%.1f,%u,",
+    sprintf(_sensorDataString, "%s,%.1f,%.1f,%.1f,%.1f,%u",
                                 _dateTimeString,
 								_sensorData_st.lat_f,
 								_sensorData_st.lon_f,
+								_sensorData_st.depth,
                                 _sensorData_st.temperature,
-                                _sensorData_st.depth,
                                 _sensorData_st.DO_value);
     
 	if (_sensorDataString[0] == '\0')
