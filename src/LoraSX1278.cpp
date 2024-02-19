@@ -99,13 +99,28 @@ void LoraSX1278_receiveData(int packetSize){
 
 ERROR_CODE LoraSX1278_receiveRequest(){
     int packetSize = LoRa.parsePacket();
+    String string = "";
     if(packetSize){
-      uint8_t recipient = LoRa.read();          // recipient address
-      uint8_t sender = LoRa.read();            // sender address
-      uint8_t request_byte_1 = LoRa.read(); 
-      uint8_t request_byte_2 = LoRa.read(); 
-      if(request_byte_1 == REQUEST_BYTE_1 && request_byte_2 == REQUEST_BYTE_2)
+      while(LoRa.available()){
+         string = LoRa.readString();
+      }
+      // uint8_t recipient = LoRa.read();          // recipient address
+      // uint8_t sender = LoRa.read();            // sender address
+      // uint8_t request_byte_1 = LoRa.read(); 
+      // uint8_t request_byte_2 = LoRa.read(); 
+    //   if(request_byte_1 == REQUEST_BYTE_1 && request_byte_2 == REQUEST_BYTE_2){
+    //     return ERROR_NONE;
+    //     log_i("Receive request successfully!");
+    // }
+    //   log_e("Receive request failed");
+    //   return ERROR_LORA_SX1278_REQUEST_MISMATCH;
+      if(string != ""){
         return ERROR_NONE;
+        log_i("Receive request successfully!");
+      }
+      log_e("Request not match!");
       return ERROR_LORA_SX1278_REQUEST_MISMATCH;
     }
+    log_e("No request received!");
+    return ERROR_LORA_SX1278_RECEIVE_FAILED;
 }

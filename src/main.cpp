@@ -59,6 +59,7 @@ void device_dataManagement(){
   DS3231_getStringDateTime(realTime, DateTime::TIMESTAMP_DATE, nameFileSaveData);
   LoraSX1278_sendDataString(sensorDataString, BRIDGE_DEVICE_ADDR, MEASUREMENT_DEVICE_ADDR);
   SDcard_saveStringDataToFile(nameFileSaveData,&connectionStatus_st, sensorDataString);
+  LoRa.receive();
 }
 
 void setup() {
