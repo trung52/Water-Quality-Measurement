@@ -100,28 +100,54 @@ void LoraSX1278_receiveData(int packetSize){
 
 void LoraSX1278_receiveRequest(int packetSize){
     if (packetSize == 0) return;
-      // uint8_t recipient = LoRa.read();          // recipient address
-      // uint8_t sender = LoRa.read();            // sender address
-      // uint8_t request_byte_1 = LoRa.read(); 
-      // uint8_t request_byte_2 = LoRa.read(); 
-      // if(request_byte_1 == REQUEST_BYTE_1 && request_byte_2 == REQUEST_BYTE_2){
-      //   RF_requestData = true;
-      //   log_i("Receive request successfully!");
-      //   return;
-      // }
-      // log_e("Receive request failed");
-      // return;
-    String string = "";
-      while(LoRa.available()){
-         string = LoRa.readString();
-      }
-      if(string != ""){
+      uint8_t recipient = LoRa.read();          // recipient address
+      uint8_t sender = LoRa.read();            // sender address
+      uint8_t request_byte_1 = LoRa.read(); 
+      uint8_t request_byte_2 = LoRa.read(); 
+      if(request_byte_1 == REQUEST_BYTE_1 && request_byte_2 == REQUEST_BYTE_2){
         RF_requestData = true;
-        log_i("Receive request successfully!");
+        //log_i("Receive request successfully!");
         return;
-      } else{
-        log_e("Receive request failed");
       }
-    log_e("No request received!");
-    return;
+      //log_e("Receive request failed");
+      return;
+    // String string = "";
+    //   if(LoRa.available()){
+    //      string = LoRa.readString();
+    //   }
+    //   if(string != ""){
+    //     RF_requestData = true;
+    //     return;
+    //   }
+    // return;
 }
+
+// ERROR_CODE LoraSX1278_receiveRequest(){
+//     int packetSize = LoRa.parsePacket();
+//     if (packetSize == 0) return ERROR_LORA_SX1278_RECEIVE_FAILED;
+//       // uint8_t recipient = LoRa.read();          // recipient address
+//       // uint8_t sender = LoRa.read();            // sender address
+//       // uint8_t request_byte_1 = LoRa.read(); 
+//       // uint8_t request_byte_2 = LoRa.read(); 
+//       // if(request_byte_1 == REQUEST_BYTE_1 && request_byte_2 == REQUEST_BYTE_2){
+//       //   RF_requestData = true;
+//       //   log_i("Receive request successfully!");
+//       //   return;
+//       // }
+//       // log_e("Receive request failed");
+//       // return;
+//     String string = "";
+//       if(LoRa.available()){
+//          string = LoRa.readString();
+//       }
+//       if(string != ""){
+//         RF_requestData = true;
+//         log_i("Receive request successfully!");
+//         return ERROR_NONE;
+//       } else{
+//         log_e("Receive request failed");
+//         return ERROR_LORA_SX1278_RECEIVE_FAILED;
+//       }
+//     log_e("No request received!");
+//     return ERROR_LORA_SX1278_RECEIVE_FAILED;
+// }

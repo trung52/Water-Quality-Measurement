@@ -35,7 +35,7 @@ char nameFileSaveData[12];							// ten file luu du lieu cua sensor theo tung ng
 
 RTC_DS3231 realTime;
 
-bool RF_requestData = false;
+bool RF_requestData;
 
 void device_getData(){
   //Get Latitude & Longitude
@@ -70,6 +70,8 @@ void setup() {
 
   digitalWrite(PIN_NUM_5V_CTRL, LOW);
   digitalWrite(PIN_NUM_12V_CTRL, HIGH);
+
+  RF_requestData = false;
 
   Serial.begin(9600);
   gps_init();
@@ -108,14 +110,25 @@ void loop() {
 
   /* ****************************************Main code**************************************** */
   
-  if(LoraSX1278_receiveRequest() == ERROR_NONE){
+  if(RF_requestData == true){
+    log_i("Receive request successfully!");
     digitalWrite(PIN_NUM_5V_CTRL, HIGH);
     digitalWrite(PIN_NUM_12V_CTRL, HIGH);
     device_getData();
     device_dataManagement();
     digitalWrite(PIN_NUM_5V_CTRL, LOW);
     digitalWrite(PIN_NUM_12V_CTRL, LOW);
+    RF_requestData = false;
   } 
+
+  // if(LoraSX1278_receiveRequest() == ERROR_NONE){
+  //   digitalWrite(PIN_NUM_5V_CTRL, HIGH);
+  //   digitalWrite(PIN_NUM_12V_CTRL, HIGH);
+  //   device_getData();
+  //   device_dataManagement();
+  //   digitalWrite(PIN_NUM_5V_CTRL, LOW);
+  //   digitalWrite(PIN_NUM_12V_CTRL, LOW);
+  // }
 
 }
 

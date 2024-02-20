@@ -32,7 +32,7 @@
 #include "DataStructure.h"
 
 extern char* dataSplited[6]; // poiter array to store data splited
-extern bool RF_requestData = false;
+extern bool RF_requestData;
 /**
  * @brief Initialize LoraSX1278 module
  * @return ERROR_NONE: if init successfully
@@ -68,6 +68,6 @@ void LoraSX1278_receiveData(int packetSize);
  * @brief Receive request from bridge device
  * 
 */
-void LoraSX1278_receiveRequest();
-
+void LoraSX1278_receiveRequest(int packetSize);
+//ERROR_CODE LoraSX1278_receiveRequest();
 #endif

@@ -1,7 +1,6 @@
 #include "DataStructure.h"
 #include <cmath>
 
-#define START_CHAR "_"
 
 ERROR_CODE creatCalibDataString(char *_calibDataString, struct calibData _calibData)
 {
@@ -28,7 +27,7 @@ ERROR_CODE createSensorDataString(char *_sensorDataString,
                                   struct sensorData _sensorData_st)
 {
     strcpy(_sensorDataString, "");
-    sprintf(_sensorDataString, START_CHAR"%s,%.1f,%.1f,%.1f,%.1f,%u",
+    sprintf(_sensorDataString, "%s,%.1f,%.1f,%.1f,%.1f,%u",
                                 _dateTimeString,
 								_sensorData_st.lat_f,
 								_sensorData_st.lon_f,
