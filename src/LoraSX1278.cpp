@@ -111,15 +111,6 @@ void LoraSX1278_receiveRequest(int packetSize){
       }
       //log_e("Receive request failed");
       return;
-    // String string = "";
-    //   if(LoRa.available()){
-    //      string = LoRa.readString();
-    //   }
-    //   if(string != ""){
-    //     RF_requestData = true;
-    //     return;
-    //   }
-    // return;
 }
 
 // ERROR_CODE LoraSX1278_receiveRequest(){

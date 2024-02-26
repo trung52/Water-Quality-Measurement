@@ -27,7 +27,7 @@ ERROR_CODE createSensorDataString(char *_sensorDataString,
                                   struct sensorData _sensorData_st)
 {
     strcpy(_sensorDataString, "");
-    sprintf(_sensorDataString, "%s,%.1f,%.1f,%.1f,%.1f,%u",
+    sprintf(_sensorDataString, "%s,%.6f,%.6f,%.1f,%.1f,%u",
                                 _dateTimeString,
 								_sensorData_st.lat_f,
 								_sensorData_st.lon_f,

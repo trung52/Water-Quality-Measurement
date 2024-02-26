@@ -83,22 +83,22 @@ void setup() {
   //delay(10 * 60 * 60);
   log_i("Init all successfully");
 }
-/*
+
 //For single-point calibration
-uint32_t DO_raw;
-uint32_t DO_cal1V;
-float DO_cal1T;
-*/
+// uint32_t DO_raw;
+// uint32_t DO_cal1V;
+// float DO_cal1T;
+
 
 void loop() {
   /* ****************************************Single-point calibration for DO sensor**************************************** */
-  /*
-  DO_raw = analogRead(PIN_NUM_DO_SENSOR);
-  DO_cal1V = DO_raw * VREF / ADC_RES;
-  DS18B20_getData(DO_cal1T);
-  Serial.println("CAL1V:\t" + String(DO_cal1V));
-  Serial.println("CAL1T:\t" + String(DO_cal1T));
-  delay(1000); */
+  
+  // DO_raw = analogRead(PIN_NUM_DO_SENSOR);
+  // DO_cal1V = DO_raw * VREF / ADC_RES;
+  // DS18B20_getData(DO_cal1T);
+  // Serial.println("CAL1V:\t" + String(DO_cal1V));
+  // Serial.println("CAL1T:\t" + String(DO_cal1T));
+  // delay(1000); 
   
   /* ****************************************Test submersible pressure sensor**************************************** */
   // averageSensorVoltage(PIN_NUM_PRESSURE_SENSOR, sensorData_st.pressVoltage);

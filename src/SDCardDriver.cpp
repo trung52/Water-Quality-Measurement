@@ -100,7 +100,7 @@ ERROR_CODE SDcard_saveStringDataToFile( const char *fileName_string,
 		File writeFile;
 		char locationFileSaveData[30] = "/";
 		strcat(locationFileSaveData, fileName_string); //se truyen vao nameFileSaveData
-		strcat(locationFileSaveData, ".txt");
+		strcat(locationFileSaveData, ".csv");
 		writeFile = SD.open(locationFileSaveData, FILE_APPEND);		// mo file de ghi du lieu
 		if (writeFile)											// kiem tra trang thai mo file co thanh cong
 		{
