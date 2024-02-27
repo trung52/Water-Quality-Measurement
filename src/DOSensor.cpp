@@ -21,7 +21,7 @@ ERROR_CODE averageSensorVoltage(uint8_t _pin, uint32_t &voltage_mv){
 ERROR_CODE DO_getData(uint32_t voltage_mv, uint8_t temperature_c, uint16_t &_DO_value){
 #if TWO_POINT_CALIBRATION == 0
   uint16_t V_saturation = (uint32_t)CAL1_V + (uint32_t)35 * temperature_c - (uint32_t)CAL1_T * 35;
-  _DO_value = (voltage_mv * DO_Table[temperature_c] / V_saturation);
+  _DO_value = (voltage_mv * DO_Table[temperature_c] / V_saturation)*doSensorCalib;
 #else
   uint16_t V_saturation = (int16_t)((int8_t)temperature_c - CAL2_T) * ((uint16_t)CAL1_V - CAL2_V) / ((uint8_t)CAL1_T - CAL2_T) + CAL2_V;
   _DO_value = (voltage_mv * DO_Table[temperature_c] / V_saturation);
