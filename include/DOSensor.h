@@ -23,7 +23,7 @@
 #define CAL2_V (1300) //mv
 #define CAL2_T (15)   //℃
 
-static float doSensorCalib = 1.98;
+static float doSensorCalib = 2.1;
 
 const uint16_t DO_Table[41] = {
     14460, 14220, 13820, 13440, 13090, 12740, 12420, 12110, 11810, 11530,
