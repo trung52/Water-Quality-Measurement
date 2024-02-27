@@ -80,8 +80,8 @@ void setup() {
   DS18B20_init();
   SDcard_init(PIN_NUM_CLK, PIN_NUM_MISO, PIN_NUM_MOSI, PIN_CS_SD_CARD, &connectionStatus_st);
   LoraSX1278_Init();
-  log_i("Warm up submersible pressure sensor and GPS module in 10 minutes...");
-  //delay(10 * 60 * 60);
+  log_i("Warm up submersible pressure sensor and GPS module in 1 minutes...");
+  delay(60000);
   log_i("Init all successfully");
 }
 
@@ -122,7 +122,6 @@ void loop() {
     device_dataManagement();
     digitalWrite(PIN_NUM_5V_CTRL, LOW);
     digitalWrite(PIN_NUM_12V_CTRL, LOW);
-    delay(2000);
     RF_requestData = false;
   } 
 
