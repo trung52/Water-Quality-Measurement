@@ -34,6 +34,7 @@ const char fileNameCalib[] = "calib.txt";			// file chua cac gia tri calib
 char nameFileSaveData[12];							// ten file luu du lieu cua sensor theo tung ngay
 
 RTC_DS3231 realTime;
+TinyGPSPlus gps;
 
 bool RF_requestData;
 
@@ -69,7 +70,7 @@ void setup() {
   pinMode(PIN_NUM_PRESSURE_SENSOR, INPUT);
 
   digitalWrite(PIN_NUM_5V_CTRL, LOW);
-  digitalWrite(PIN_NUM_12V_CTRL, HIGH);
+  digitalWrite(PIN_NUM_12V_CTRL, LOW);
 
   RF_requestData = false;
 
@@ -112,12 +113,16 @@ void loop() {
   
   if(RF_requestData == true){
     log_i("Receive request successfully!");
+    while(Serial2.available() > 0){
+        gps.encode(Serial2.read());      
+    }
     digitalWrite(PIN_NUM_5V_CTRL, HIGH);
     digitalWrite(PIN_NUM_12V_CTRL, HIGH);
     device_getData();
     device_dataManagement();
     digitalWrite(PIN_NUM_5V_CTRL, LOW);
     digitalWrite(PIN_NUM_12V_CTRL, LOW);
+    delay(2000);
     RF_requestData = false;
   } 
 

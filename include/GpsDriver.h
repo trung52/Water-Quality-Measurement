@@ -17,9 +17,8 @@
 #include "HardwareSerial.h"
 #include "configs.h"
 
-static TinyGPSPlus gps;
 
-static HardwareSerial neoGPS(2);
+//static HardwareSerial neoGPS(2);
 
 
 #define ERROR_GPS_INIT_FAILED                0xA2

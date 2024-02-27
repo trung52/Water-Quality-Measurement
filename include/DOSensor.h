@@ -41,7 +41,7 @@ ERROR_CODE averageSensorVoltage(uint8_t _pin, uint32_t &voltage_mv);
  * @brief Get DO value 
  * @param[in] voltage_mv: sensor voltage (get from ADC)
  * @param[in] temperature_c: measured environment temperature in Celsius (get from DS18B20)
- * @param[out] _DO_value: DO value
+ * @param[out] _DO_value: DO value (ug/L)
  * @return ERROR_CODE
 */
 ERROR_CODE DO_getData(uint32_t voltage_mv, uint8_t temperature_c, uint16_t &_DO_value);
