@@ -81,21 +81,6 @@ void LoraSX1278_receiveData(int packetSize){
         count++;
         token = strtok(NULL, ",");
     }
-    
-
-    // if message is for this device, or broadcast, print details:
-    Serial.println("Received from: 0x" + String(sender, HEX));
-    Serial.println("Sent to: 0x" + String(recipient, HEX));
-    Serial.println("Datalength: " + String(incomingDataLength));
-    Serial.println("DateTime: " + String(dataSplited[0]) 
-                                + "\tLatitue:" + String(dataSplited[1]) 
-                                + "\tLongitude:" + String(dataSplited[2])
-                                + "\tDepth:" + String(dataSplited[3])
-                                + "\tTemp:" + String(dataSplited[4])
-                                + "\tDO:" + String(dataSplited[5]));
-    Serial.println("RSSI: " + String(LoRa.packetRssi()));
-    Serial.println("Snr: " + String(LoRa.packetSnr()));
-    Serial.println();
 }   
 
 void LoraSX1278_receiveRequest(int packetSize){
@@ -104,9 +89,19 @@ void LoraSX1278_receiveRequest(int packetSize){
       uint8_t sender = LoRa.read();            // sender address
       uint8_t request_byte_1 = LoRa.read(); 
       uint8_t request_byte_2 = LoRa.read(); 
+
+      String incomingData = "";                 // payload of packet
+      while (LoRa.available()) {            // can't use readString() in callback, so
+        incomingData += (char)LoRa.read();      // add bytes one by one
+      }
+      // float value_fl = incomingData.toFloat();
+      // if( value_fl != 0.00 ){ can't compare float value in callback function because it cause core dump
+      // densityWater = value_fl;
+      // }
+      densityWaterTemp = incomingData.toFloat();
       if(request_byte_1 == REQUEST_BYTE_1 && request_byte_2 == REQUEST_BYTE_2){
         RF_requestData = true;
-        //log_i("Receive request successfully!");
+        //log_i("Receive request successfully!"); //can't use log_i and log_e in callback funtion because it cause core dump
         return;
       }
       //log_e("Receive request failed");

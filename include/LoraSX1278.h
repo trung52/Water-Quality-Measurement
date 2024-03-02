@@ -33,6 +33,7 @@
 
 extern char* dataSplited[6]; // poiter array to store data splited
 extern bool RF_requestData;
+extern float densityWaterTemp;
 /**
  * @brief Initialize LoraSX1278 module
  * @return ERROR_NONE: if init successfully

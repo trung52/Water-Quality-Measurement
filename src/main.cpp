@@ -38,6 +38,8 @@ TinyGPSPlus gps;
 
 bool RF_requestData;
 
+float densityWaterTemp = 1.0;
+float densityWater = 1.0;
 void device_getData(){
   //Get Latitude & Longitude
   if(connectionStatus_st.gpsStatus == status_et::CONNECTED)
@@ -49,7 +51,7 @@ void device_getData(){
   DO_getData(sensorData_st.DO_voltage, sensorData_st.temperature, sensorData_st.DO_value);
   //Get depth
   averageSensorVoltage(PIN_NUM_PRESSURE_SENSOR, sensorData_st.pressVoltage);
-  submersiblePressure_getDepth(sensorData_st.pressVoltage, sensorData_st.pressCurrent, sensorData_st.depth);
+  submersiblePressure_getDepth(sensorData_st.pressVoltage, sensorData_st.pressCurrent, sensorData_st.depth, densityWater);
   log_i("Get data successfully!");
 
 }
@@ -116,6 +118,10 @@ void loop() {
     while(Serial2.available() > 0){
         gps.encode(Serial2.read());      
     }
+    if(densityWaterTemp != 0.00f){
+      densityWater = densityWaterTemp;
+    }
+    Serial.println(densityWater);
     digitalWrite(PIN_NUM_5V_CTRL, HIGH);
     digitalWrite(PIN_NUM_12V_CTRL, HIGH);
     device_getData();
