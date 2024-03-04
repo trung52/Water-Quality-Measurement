@@ -43,6 +43,7 @@ struct connectionStatus
 };
 
 extern struct connectionStatus connectionStatus_st;
+#define PIN_NUM_WARM_UP_LED   (13)
 //========================== DEFINE FOR LOGGING ========================
 
 #define USING_SDCARD
